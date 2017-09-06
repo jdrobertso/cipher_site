@@ -1,18 +1,20 @@
 require 'sinatra'
-
+require 'sinatra/reloader' if development?
 
 get '/' do
-
 	erb :index
 end
 
-puts "What message would you like to encrypt?"
-message = gets.chomp
-puts "How far should I shift it?"
-shift = gets.chomp
+get '/submit' do
+	message = params['message']
+	shift = params['shift'].to_i
+	new_message = shift(message, shift)
+	erb :index, :locals => {:new_message => new_message}
+end
 
-letters = message.split(//)
-letters.each do |letters|
-	x = letters.to_i
-	puts x
+def shift(message, shift)
+	ascii 		= message.chars.map(&:ord)
+	shifted 	= ascii.map{|c| c + shift}
+	new_message = shifted.map{|c| c.chr}.join
+	new_message
 end

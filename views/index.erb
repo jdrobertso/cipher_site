@@ -2,5 +2,17 @@
 	<head>
 	</head>
 	<body>
+	<form action='submit'>
+	<h2>What message would you like to encrypt?</h2>
+	<input type='text' name='message' />
+	<h2>How far would you like to shift it?</h2>
+	<input type='text' name='shift' />
+	<input type='submit' value='Submit!' />
+	</form>
+	<h2> Current output is </h2>
+	<%= new_message ||= "hello" %>
+
+
+
 	</body>
 </html>
